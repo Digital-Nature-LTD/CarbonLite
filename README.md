@@ -1,2 +1,86 @@
 # CarbonLite
 A lightweight tool that blacks out a browser window when the user has not interacted with the page for a while
+
+## Installation
+Installation is as simple as adding the script to your site/page:
+
+```html
+<script type="text/javascript" src="/carbon-lite.js" defer></script>
+```
+
+### Need help with installation?
+We're keen to get CarbonLite installed on as many sites as possible. If you're not able to get it up and running yourself then please get in touch with us on hello@digital-nature.co.uk and we will help with the installation - free of charge.
+
+## Configuration
+There are several options available to personalise the CarbonLite overlay and message, you can add these to the url parameters when you're adding the script to your page.
+
+Note that examples each show a single parameter, but you can add several using the `&` character between each parameter - `e.g. src="/carbon-lite.js?timeout=45000&message=Hello, world!"`.
+
+### Timeout
+This is the number of milliseconds before CarbonLite is triggered
+#### Param: timeout
+#### Default: 60000 (60 seconds)
+#### Example
+```html
+<!-- CarbonLite triggers after 45 seconds of inactivity -->
+<script type="text/javascript" src="/carbon-lite.js?timeout=45000"></script>
+```
+
+### Message Timeout
+This is the number of milliseconds that it takes for the CarbonLite message to fade out after the user interacts with the page
+#### Param: messageTimeout
+#### Default: 3000 (3 seconds)
+#### Example
+```html
+<!-- The message fades out after 10 seconds -->
+<script type="text/javascript" src="/carbon-lite.js?messageTimeout=10000"></script>
+```
+
+### Message
+The message displayed in the middle of the screen when CarbonLite is active
+#### Param: message
+#### Default: Saving the planet, one (dark) pixel at a time
+#### Example
+```html
+<script type="text/javascript" src="/carbon-lite.js?message=My website is reducing carbon"></script>
+```
+
+### Background Colour
+The background colour when CarbonLite is active. Note that the purpose of CarbonLite is to reduce energy usage, so please ensure you choose a low-energy colour if you're replacing the default
+#### Param: backgroundColour
+#### Default: #000 (black)
+#### Example
+```html
+<!-- Using a named colour -->
+<script type="text/javascript" src="/carbon-lite.js?backgroundColour=green"></script>
+```
+
+Note that when using a hex colour you should encode the hash as %23 otherwise the value will be lost
+```html
+<!-- Note that when using a hex colour you should encode the hash as %23 -->
+<script type="text/javascript" src="/carbon-lite.js?backgroundColour=%23333"></script>
+```
+
+### Message Colour
+The text/icon colour of the messages shown while CarbonLite is active
+#### Param: messageColour
+#### Default: #222
+#### Example - As "Background Colour" but with updated parameter name
+
+### Message Colour on Hover
+The text/icon colour of the CarbonLite message while hovering 
+#### Param: messageColourHover
+#### Default: #DDD
+#### Example - As "Background Colour" but with updated parameter name
+
+### Message Border Colour
+The colour of the CarbonLite message border, not that this is only shown when the CarbonLite background has been removed
+#### Param: messageBorderColour
+#### Default: #DDD
+#### Example - As "Background Colour" but with updated parameter name
+
+### Message Drop Shadow Colour
+The colour of the CarbonLite message drop shadow, not that this is only shown when the CarbonLite background has been removed
+#### Param: messageDropShadowColour
+#### Default: #555
+#### Example - As "Background Colour" but with updated parameter name
