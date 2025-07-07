@@ -36,7 +36,7 @@ export default [
     },
     // UMD build with auto-config
     {
-        input: 'src/carbon-lite-props.js',
+        input: 'src/CarbonLiteAuto.js',
         output: {
             file: 'dist/carbon-lite-auto.umd.js',
             format: 'umd',
