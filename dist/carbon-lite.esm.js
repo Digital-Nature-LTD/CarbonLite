@@ -1,238 +1,3 @@
-window.CarbonLite =
-    {
-        initialised: false,
-        hoveringMessage: false,
-
-        // objects
-        carbonLite: null,
-        carbonLiteMessage: null,
-        carbonLiteTimer: null,
-        carbonLiteMessageTimer: null,
-
-        // configurable
-        config: {
-            message: 'Saving the planet, one (dark) pixel at a time',
-            timeout: 60000,
-            backgroundColour: '#000',
-            messageTimeout: 3000,
-            messageColour: '#222',
-            messageColourHover: '#DDD',
-            messageBorderColour: '#DDD',
-            messageDropShadowColour: '#555',
-        },
-
-        configure: function(configuration) {
-            this.config = {...this.config, ...configuration}
-        },
-
-        init: function(configuration) {
-            if (this.initialised) {
-                return
-            }
-
-            if (configuration) {
-                this.configure(configuration)
-            }
-
-            // add styles
-            const style = document.createElement('style')
-            style.innerHTML = this.generateStyles()
-            document.head.appendChild(style)
-
-            this.addEventListeners()
-            this.restartTimer()
-            this.initialised = true
-        },
-
-        generateStyles: function() {
-            return `
-            carbon-lite {
-                position: fixed;
-                bottom: 0;
-                right: 0;
-                top: 0;
-                left: 0;
-                color: ${this.config.messageColour};
-                z-index: 999998;
-                background: ${this.config.backgroundColour};
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            carbon-lite-message {
-                position: fixed;
-                bottom: 100px;
-                right: 100px;
-                color: ${this.config.messageColour};
-                text-align: center;
-                z-index: 999999;
-                opacity: 0.8;
-                transition: opacity ${this.config.messageTimeout}ms ease-in;
-                
-                a {
-                    color: ${this.config.messageColour};
-                    background: ${this.config.backgroundColour};
-                    padding: 20px;
-                    display: block;
-                    text-decoration: none;
-                    border-radius: 20px;
-                    border: 3px solid ${this.config.backgroundColour};
-                    
-                    &:hover {
-                        color: ${this.config.messageColourHover};
-                        text-decoration: underline;
-                        border-color: ${this.config.messageBorderColour};
-                        filter: drop-shadow(0 0 0.75rem ${this.config.messageDropShadowColour});
-                    }
-                    
-                    svg {
-                        height: 100px;
-                        display: block;
-                        margin: 0 auto 20px auto;
-                    }               
-                }
-                
-                &.fading {
-                    opacity: 0;
-                    
-                    a {
-                        border-color: ${this.config.messageBorderColour};
-                        filter: drop-shadow(0 0 0.75rem ${this.config.messageDropShadowColour});
-                    }
-                }
-                
-                &:hover {
-                    transition: opacity 0ms linear;
-                }
-            }
-        `;
-        },
-
-        addEventListeners: function() {
-            console.log('CarbonLite: adding event listeners')
-
-            let CarbonLite = this;
-            document.addEventListener(`mousemove`, () => {
-                CarbonLite.userInteracted()
-            })
-        },
-
-        restartTimer: function() {
-            clearTimeout(this.carbonLiteTimer)
-            this.carbonLiteTimer = setTimeout(() => { this.open() }, this.config.timeout)
-        },
-
-        userInteracted: function() {
-            if (this.carbonLite) {
-                this.hideBackground()
-            } else {
-                this.restartTimer()
-            }
-        },
-
-        hideBackground: function() {
-            if (!this.carbonLite || !this.carbonLite.parentNode) {
-                return;
-            }
-
-            document.body.removeChild(this.carbonLite)
-
-            if (this.carbonLiteMessage) {
-                this.fadeOutMessage()
-            }
-        },
-
-        hideMessage: function() {
-            let CarbonLite = this;
-
-            if (!CarbonLite.carbonLiteMessage || !CarbonLite.carbonLiteMessage.parentNode) {
-                return;
-            }
-            console.log('CarbonLite: hiding message')
-
-            document.body.removeChild(CarbonLite.carbonLiteMessage)
-            console.log('CarbonLite: clearing message fade out timer due to message being hidden')
-            clearTimeout(CarbonLite.carbonLiteMessageTimer)
-            CarbonLite.carbonLiteMessage.classList.remove('fading')
-
-            console.log('CarbonLite: restarting timer after message has been hidden')
-            CarbonLite.restartTimer()
-        },
-
-        fadeOutMessage: function() {
-            console.log('CarbonLite: setting timer to fade out message')
-
-            this.carbonLiteMessage.classList.add('fading')
-            this.carbonLiteMessageTimer = setTimeout(() => { this.hideMessage() }, this.config.messageTimeout)
-        },
-
-        open: function(){
-            console.log('CarbonLite: opening')
-            let CarbonLite = this;
-
-            CarbonLite.createBackground()
-
-            if (CarbonLite.carbonLiteMessageTimer) {
-                console.log('CarbonLite: clearing message fade out timer')
-                clearTimeout(CarbonLite.carbonLiteMessageTimer)
-            }
-
-            CarbonLite.createMessage(CarbonLite.config.message)
-
-            document.body.appendChild(CarbonLite.carbonLite)
-            document.body.appendChild(CarbonLite.carbonLiteMessage)
-        },
-
-        createBackground: function() {
-            if (this.carbonLite) {
-                return;
-            }
-
-            console.log('CarbonLite: creating background')
-            this.carbonLite = document.createElement('carbon-lite')
-            this.carbonLite.render(this.config.message)
-        },
-
-        createMessage: function() {
-            if (this.carbonLiteMessage) {
-                return
-            }
-
-            let CarbonLite = this;
-
-            console.log('CarbonLite: creating message')
-            this.carbonLiteMessage = document.createElement('carbon-lite-message')
-
-            // @TODO the message is not fading out correctly, it should stop fading when hovered - see restartTimer() for more info
-            this.carbonLiteMessage.addEventListener(`mouseenter`, (event) => {
-                CarbonLite.hoveringMessage =  true;
-                CarbonLite.carbonLiteMessage.classList.remove('fading')
-                if (CarbonLite.carbonLiteMessageTimer) {
-                    console.log('CarbonLite: clearing message fade out timer due to mouseenter')
-                    clearTimeout(CarbonLite.carbonLiteMessageTimer)
-                }
-            })
-
-            this.carbonLiteMessage.addEventListener(`mouseleave`, (event) => {
-                CarbonLite.hoveringMessage =  false;
-                CarbonLite.fadeOutMessage()
-            })
-        }
-    }
-
-
-class CarbonLiteElement extends HTMLElement {
-    render(message) {
-        this.innerHTML = `
-          <div>
-            ${message}
-          </div>
-        `;
-    }
-}
-customElements.define('carbon-lite', CarbonLiteElement);
-
 class CarbonLiteMessage extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -271,40 +36,187 @@ class CarbonLiteMessage extends HTMLElement {
 }
 customElements.define('carbon-lite-message', CarbonLiteMessage);
 
+class CarbonLiteElement extends HTMLElement {
+    configure(message) {
+        this.innerHTML = `
+          <div>
+            ${message}
+          </div>
+        `;
+    }
+}
+customElements.define('carbon-lite', CarbonLiteElement);
 
-
-
-
-
-
-
-
-const script = document.currentScript;
-if (script) {
-    let CarbonLiteConfig = {};
-
-    let params = [
-        'message',
-        'timeout',
-        'backgroundColour',
-        'messageTimeout',
-        'messageColour',
-        'messageColourHover',
-        'messageBorderColour',
-        'messageDropShadowColour',
-        'styles'
-    ];
-
-    const url = new URL(script.src)
-    if (url) {
-        params.forEach(param => {
-            if (url.searchParams.get(param)) {
-                CarbonLiteConfig[param] = url.searchParams.get(param);
+class CarbonLite {
+    initialised = false;
+    // objects
+    carbonLite = new CarbonLiteElement();
+    carbonLiteMessage = new CarbonLiteMessage();
+    carbonLiteTimer = undefined;
+    carbonLiteMessageTimer = undefined;
+    // configurable
+    config = {
+        message: 'Saving the planet, one (dark) pixel at a time',
+        timeout: 60000,
+        backgroundColour: '#000',
+        messageTimeout: 3000,
+        messageColour: '#222',
+        messageColourHover: '#DDD',
+        messageBorderColour: '#DDD',
+        messageDropShadowColour: '#555',
+    };
+    configure(configuration) {
+        this.config = { ...this.config, ...configuration };
+    }
+    init(configuration = null) {
+        if (this.initialised) {
+            return;
+        }
+        if (configuration) {
+            this.configure(configuration);
+        }
+        if (this.config.message) {
+            this.carbonLite.configure(this.config.message);
+        }
+        // add styles
+        const style = document.createElement('style');
+        style.innerHTML = this.generateStyles();
+        document.head.appendChild(style);
+        this.addEventListeners();
+        this.restartTimer();
+        this.initialised = true;
+    }
+    generateStyles() {
+        return `
+        carbon-lite {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            top: 0;
+            left: 0;
+            color: ${this.config.messageColour};
+            z-index: 999998;
+            background: ${this.config.backgroundColour};
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        carbon-lite-message {
+            position: fixed;
+            bottom: 100px;
+            right: 100px;
+            color: ${this.config.messageColour};
+            text-align: center;
+            z-index: 999999;
+            opacity: 0.8;
+            transition: opacity ${this.config.messageTimeout}ms ease-in;
+            
+            a {
+                color: ${this.config.messageColour};
+                background: ${this.config.backgroundColour};
+                padding: 20px;
+                display: block;
+                text-decoration: none;
+                border-radius: 20px;
+                border: 3px solid ${this.config.backgroundColour};
+                
+                &:hover {
+                    color: ${this.config.messageColourHover};
+                    text-decoration: underline;
+                    border-color: ${this.config.messageBorderColour};
+                    filter: drop-shadow(0 0 0.75rem ${this.config.messageDropShadowColour});
+                }
+                
+                svg {
+                    height: 100px;
+                    display: block;
+                    margin: 0 auto 20px auto;
+                }               
+            }
+            
+            &.fading {
+                opacity: 0;
+                
+                a {
+                    border-color: ${this.config.messageBorderColour};
+                    filter: drop-shadow(0 0 0.75rem ${this.config.messageDropShadowColour});
+                }
+            }
+            
+            &:hover {
+                transition: opacity 0ms linear;
+            }
+        }
+    `;
+    }
+    addEventListeners() {
+        console.log('CarbonLite: adding event listeners');
+        console.log('CarbonLite: adding mousemove event listeners');
+        let CarbonLite = this;
+        document.addEventListener(`mousemove`, () => {
+            CarbonLite.userInteracted();
+        });
+        console.log('CarbonLite: adding message event listeners');
+        CarbonLite.carbonLiteMessage.addEventListener(`mouseenter`, (event) => {
+            CarbonLite.carbonLiteMessage.classList.remove('fading');
+            if (CarbonLite.carbonLiteMessageTimer) {
+                console.log('CarbonLite: clearing message fade out timer due to mouseenter');
+                clearTimeout(CarbonLite.carbonLiteMessageTimer);
             }
         });
+        CarbonLite.carbonLiteMessage.addEventListener(`mouseleave`, (event) => {
+            CarbonLite.fadeOutMessage();
+        });
     }
-
-    window.CarbonLite.init(CarbonLiteConfig);
-} else {
-    window.CarbonLite.init();
+    restartTimer() {
+        clearTimeout(this.carbonLiteTimer);
+        this.carbonLiteTimer = setTimeout(() => { this.open(); }, this.config.timeout);
+    }
+    userInteracted() {
+        if (this.carbonLite) {
+            this.hideBackground();
+        }
+        else {
+            this.restartTimer();
+        }
+    }
+    hideBackground() {
+        if (!this.carbonLite || !this.carbonLite.parentNode) {
+            return;
+        }
+        document.body.removeChild(this.carbonLite);
+        this.fadeOutMessage();
+    }
+    hideMessage() {
+        let CarbonLite = this;
+        if (!CarbonLite.carbonLiteMessage || !CarbonLite.carbonLiteMessage.parentNode) {
+            return;
+        }
+        console.log('CarbonLite: hiding message');
+        document.body.removeChild(CarbonLite.carbonLiteMessage);
+        console.log('CarbonLite: clearing message fade out timer due to message being hidden');
+        clearTimeout(CarbonLite.carbonLiteMessageTimer);
+        CarbonLite.carbonLiteMessage.classList.remove('fading');
+        console.log('CarbonLite: restarting timer after message has been hidden');
+        CarbonLite.restartTimer();
+    }
+    fadeOutMessage() {
+        console.log('CarbonLite: setting timer to fade out message');
+        this.carbonLiteMessage.classList.add('fading');
+        this.carbonLiteMessageTimer = setTimeout(() => { this.hideMessage(); }, this.config.messageTimeout);
+    }
+    open() {
+        console.log('CarbonLite: opening');
+        let CarbonLite = this;
+        if (CarbonLite.carbonLiteMessageTimer) {
+            console.log('CarbonLite: clearing message fade out timer');
+            clearTimeout(CarbonLite.carbonLiteMessageTimer);
+        }
+        document.body.appendChild(CarbonLite.carbonLite);
+        document.body.appendChild(CarbonLite.carbonLiteMessage);
+    }
 }
+
+export { CarbonLite as default };
+//# sourceMappingURL=carbon-lite.esm.js.map
