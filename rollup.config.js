@@ -1,48 +1,79 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 
 export default [
     // ESM build
     {
-        input: 'src/CarbonLite.ts',
+        input: 'src/index.ts',
         output: {
-            file: 'dist/carbon-lite.esm.js',
+            dir: 'dist/esm',
             format: 'esm',
             sourcemap: true,
+            preserveModules: true,
+            preserveModulesRoot: 'src'
         },
-        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+                // IMPORTANT: Do NOT emit declarations here
+                declaration: false,
+                emitDeclarationOnly: false
+            })
+        ],
+        external: []
     },
-    // CommonJS build
+    // CJS build
     {
-        input: 'src/CarbonLite.ts',
+        input: 'src/index.ts',
         output: {
-            file: 'dist/carbon-lite.cjs.js',
+            dir: 'dist/cjs',
             format: 'cjs',
             sourcemap: true,
+            preserveModules: true,
+            preserveModulesRoot: 'src'
         },
-        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+                declaration: false,
+                emitDeclarationOnly: false
+            })
+        ],
+        external: []
     },
-    // UMD build
+    // UMD build (single file)
     {
-        input: 'src/CarbonLite.ts',
+        input: 'src/index.ts',
         output: {
-            file: 'dist/carbon-lite.umd.js',
+            file: 'dist/umd/carbonlite.js',
             format: 'umd',
-            name: 'CarbonLite', // <-- This is the global variable exposed in browsers
-            sourcemap: true,
+            name: 'CarbonLite',
+            sourcemap: true
         },
-        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+                declaration: false,
+                emitDeclarationOnly: false
+            })
+        ],
+        external: []
     },
-    // UMD build with auto-config
+    // UMD build (auto start file)
     {
-        input: 'src/CarbonLiteAuto.js',
+        input: 'src/core/CarbonLiteSimple.js',
         output: {
-            file: 'dist/carbon-lite-auto.umd.js',
+            file: 'dist/umd/carbonlite-simple.js',
             format: 'umd',
-            name: 'CarbonLite', // <-- This is the global variable exposed in browsers
-            sourcemap: true,
+            name: 'CarbonLite',
+            sourcemap: true
         },
-        plugins: [resolve(), commonjs(), typescript({ tsconfig: './tsconfig.json' })],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+                declaration: false,
+                emitDeclarationOnly: false
+            })
+        ],
+        external: []
     }
 ];

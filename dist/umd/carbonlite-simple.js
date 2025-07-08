@@ -53,23 +53,25 @@
     customElements.define('carbon-lite', CarbonLiteElement);
 
     class CarbonLite {
-        initialised = false;
-        // objects
-        carbonLite = new CarbonLiteElement();
-        carbonLiteMessage = new CarbonLiteMessage();
-        carbonLiteTimer = undefined;
-        carbonLiteMessageTimer = undefined;
-        // configurable
-        config = {
-            message: 'Saving the planet, one (dark) pixel at a time',
-            timeout: 60000,
-            backgroundColour: '#000',
-            messageTimeout: 3000,
-            messageColour: '#222',
-            messageColourHover: '#DDD',
-            messageBorderColour: '#DDD',
-            messageDropShadowColour: '#555',
-        };
+        constructor() {
+            this.initialised = false;
+            // objects
+            this.carbonLite = new CarbonLiteElement();
+            this.carbonLiteMessage = new CarbonLiteMessage();
+            this.carbonLiteTimer = undefined;
+            this.carbonLiteMessageTimer = undefined;
+            // configurable
+            this.config = {
+                message: 'Saving the planet, one (dark) pixel at a time',
+                timeout: 60000,
+                backgroundColour: '#000',
+                messageTimeout: 3000,
+                messageColour: '#222',
+                messageColourHover: '#DDD',
+                messageBorderColour: '#DDD',
+                messageDropShadowColour: '#555',
+            };
+        }
         configure(configuration) {
             this.config = { ...this.config, ...configuration };
         }
@@ -256,4 +258,4 @@
     }
 
 }));
-//# sourceMappingURL=carbon-lite-auto.umd.js.map
+//# sourceMappingURL=carbonlite-simple.js.map
