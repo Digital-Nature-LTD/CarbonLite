@@ -1,5 +1,5 @@
 # CarbonLite
-A lightweight tool that blacks out a browser window when the user has not interacted with the page for a while.
+A lightweight tool (~17 KB) that blacks out a browser window when the user has not interacted with the page for a while.
 
 ![A preview of CarbonLite in action](carbon-lite-preview.png "CarbonLite when activated")
 
@@ -41,7 +41,7 @@ We're keen to get CarbonLite installed on as many sites as possible. If you're n
 
 
 ## Configuration
-There are several options available to personalise the CarbonLite overlay and message, you can add these to the url parameters when you're adding the script to your page.
+There are several options available to personalise the CarbonLite overlay and message, you can add these to the url parameters when you're adding the script to your page, or to the configuration object when calling the init method.
 
 Note that examples each show a single parameter, but you can add several using the `&` character between each parameter - `e.g. src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?timeout=45000&message=Hello, world!"`.
 
