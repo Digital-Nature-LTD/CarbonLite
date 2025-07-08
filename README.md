@@ -43,7 +43,7 @@ We're keen to get CarbonLite installed on as many sites as possible. If you're n
 ## Configuration
 There are several options available to personalise the CarbonLite overlay and message, you can add these to the url parameters when you're adding the script to your page.
 
-Note that examples each show a single parameter, but you can add several using the `&` character between each parameter - `e.g. src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?timeout=45000&message=Hello, world!"`.
+Note that examples each show a single parameter, but you can add several using the `&` character between each parameter - `e.g. src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?timeout=45000&message=Hello, world!"`.
 
 ### Timeout
 This is the number of milliseconds before CarbonLite is triggered
@@ -52,7 +52,7 @@ This is the number of milliseconds before CarbonLite is triggered
 #### Example
 ```html
 <!-- CarbonLite triggers after 45 seconds of inactivity -->
-<script defer="defer" type="text/javascript" src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?timeout=45000"></script>
+<script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?timeout=45000"></script>
 ```
 
 ### Message Timeout
@@ -62,7 +62,7 @@ This is the number of milliseconds that it takes for the CarbonLite message to f
 #### Example
 ```html
 <!-- The message fades out after 10 seconds -->
-<script defer="defer" type="text/javascript" src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?messageTimeout=10000"></script>
+<script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?messageTimeout=10000"></script>
 ```
 
 ### Message
@@ -71,7 +71,7 @@ The message displayed in the middle of the screen when CarbonLite is active
 #### Default: Saving the planet, one (dark) pixel at a time
 #### Example
 ```html
-<script defer="defer" type="text/javascript" src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?message=My website is reducing carbon"></script>
+<script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?message=My website is reducing carbon"></script>
 ```
 
 ### Background Colour
@@ -81,13 +81,13 @@ The background colour when CarbonLite is active. Note that the purpose of Carbon
 #### Example
 ```html
 <!-- Using a named colour -->
-<script defer="defer" type="text/javascript" src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?backgroundColour=green"></script>
+<script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?backgroundColour=green"></script>
 ```
 
 Note that when using a hex colour you should encode the hash as %23 otherwise the value will be lost
 ```html
 <!-- Note that when using a hex colour you should encode the hash as %23 -->
-<script defer="defer" type="text/javascript" src=".https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?backgroundColour=%23333"></script>
+<script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?backgroundColour=%23333"></script>
 ```
 
 ### Message Colour
