@@ -1,5 +1,5 @@
 {
-  "name": "carbon-lite",
+  "name": "@digital-nature-ltd/carbon-lite",
   "description": "A simple tool to reduce the carbon usage of your website by blanking out the screen after a period of inactivity",
   "version": "0.0.1",
   "license": "MIT",
