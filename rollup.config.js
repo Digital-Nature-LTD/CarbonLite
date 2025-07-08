@@ -3,7 +3,7 @@ import typescript from '@rollup/plugin-typescript';
 export default [
     // ESM build
     {
-        input: 'src/index.ts',
+        input: 'src/CarbonLite.ts',
         output: {
             dir: 'dist/esm',
             format: 'esm',
@@ -23,7 +23,7 @@ export default [
     },
     // CJS build
     {
-        input: 'src/index.ts',
+        input: 'src/CarbonLite.ts',
         output: {
             dir: 'dist/cjs',
             format: 'cjs',
@@ -42,7 +42,7 @@ export default [
     },
     // UMD build (single file)
     {
-        input: 'src/index.ts',
+        input: 'src/CarbonLite.ts',
         output: {
             file: 'dist/umd/carbonlite.js',
             format: 'umd',
@@ -60,7 +60,7 @@ export default [
     },
     // UMD build (auto start file)
     {
-        input: 'src/core/CarbonLiteSimple.js',
+        input: 'src/CarbonLiteSimple.js',
         output: {
             file: 'dist/umd/carbonlite-simple.js',
             format: 'umd',

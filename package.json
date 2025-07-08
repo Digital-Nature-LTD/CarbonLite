@@ -21,11 +21,11 @@
     "url": "https://github.com/sponsors/Digital-Nature-LTD"
   },
   "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/cjs/CarbonLite.js",
+  "module": "./dist/esm/CarbonLite.js",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js"
+    "import": "./dist/esm/CarbonLite.js",
+    "require": "./dist/cjs/CarbonLite.js"
   },
   "scripts": {
     "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",

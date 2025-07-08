@@ -1,6 +1,6 @@
-import { CarbonLiteMessage } from '../elements/CarbonLiteMessage'
-import { CarbonLiteElement } from '../elements/CarbonLiteElement'
-import { CarbonLiteConfig } from '../types/CarbonLiteConfig';
+import { CarbonLiteMessage } from './elements/CarbonLiteMessage'
+import { CarbonLiteElement } from './elements/CarbonLiteElement'
+import { CarbonLiteConfig } from './types/CarbonLiteConfig';
 
 export default class CarbonLite {
     initialised: boolean = false;
@@ -28,6 +28,7 @@ export default class CarbonLite {
     }
 
     init(configuration: CarbonLiteConfig|null = null) {
+        console.log('CarbonLite: initialising')
         if (this.initialised) {
             return
         }

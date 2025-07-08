@@ -76,6 +76,7 @@
             this.config = { ...this.config, ...configuration };
         }
         init(configuration = null) {
+            console.log('CarbonLite: initialising');
             if (this.initialised) {
                 return;
             }
