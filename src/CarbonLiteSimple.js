@@ -15,7 +15,8 @@ if (script) {
         'messageColourHover',
         'messageBorderColour',
         'messageDropShadowColour',
-        'styles'
+        'styles',
+        'debug'
     ];
 
     const url = new URL(script.src)

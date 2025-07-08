@@ -21,14 +21,21 @@ export default class CarbonLite {
         messageColourHover: '#DDD',
         messageBorderColour: '#DDD',
         messageDropShadowColour: '#555',
+        debug: false
     };
 
     configure(configuration: object){
         this.config = {...this.config, ...configuration}
     }
 
+    debug(message: string) {
+        if (this.config.debug) {
+            console.log(message)
+        }
+    }
+
     init(configuration: CarbonLiteConfig|null = null) {
-        console.log('CarbonLite: initialising')
+        this.debug('CarbonLite: initialising')
         if (this.initialised) {
             return
         }
@@ -117,20 +124,20 @@ export default class CarbonLite {
     }
 
     addEventListeners() {
-        console.log('CarbonLite: adding event listeners')
+        this.debug('CarbonLite: adding event listeners')
 
-        console.log('CarbonLite: adding mousemove event listeners')
+        this.debug('CarbonLite: adding mousemove event listeners')
         let CarbonLite = this;
         document.addEventListener(`mousemove`, () => {
             CarbonLite.userInteracted()
         })
 
-        console.log('CarbonLite: adding message event listeners')
+        this.debug('CarbonLite: adding message event listeners')
 
         CarbonLite.carbonLiteMessage.addEventListener(`mouseenter`, (event) => {
             CarbonLite.carbonLiteMessage.classList.remove('fading')
             if (CarbonLite.carbonLiteMessageTimer) {
-                console.log('CarbonLite: clearing message fade out timer due to mouseenter')
+                this.debug('CarbonLite: clearing message fade out timer due to mouseenter')
                 clearTimeout(CarbonLite.carbonLiteMessageTimer)
             }
         })
@@ -168,30 +175,30 @@ export default class CarbonLite {
         if (!CarbonLite.carbonLiteMessage || !CarbonLite.carbonLiteMessage.parentNode) {
             return;
         }
-        console.log('CarbonLite: hiding message')
+        this.debug('CarbonLite: hiding message')
 
         document.body.removeChild(CarbonLite.carbonLiteMessage)
-        console.log('CarbonLite: clearing message fade out timer due to message being hidden')
+        this.debug('CarbonLite: clearing message fade out timer due to message being hidden')
         clearTimeout(CarbonLite.carbonLiteMessageTimer)
         CarbonLite.carbonLiteMessage.classList.remove('fading')
 
-        console.log('CarbonLite: restarting timer after message has been hidden')
+        this.debug('CarbonLite: restarting timer after message has been hidden')
         CarbonLite.restartTimer()
     }
 
     fadeOutMessage() {
-        console.log('CarbonLite: setting timer to fade out message')
+        this.debug('CarbonLite: setting timer to fade out message')
 
         this.carbonLiteMessage.classList.add('fading')
         this.carbonLiteMessageTimer = setTimeout(() => { this.hideMessage() }, this.config.messageTimeout)
     }
 
     open() {
-        console.log('CarbonLite: opening')
+        this.debug('CarbonLite: opening')
         let CarbonLite = this;
 
         if (CarbonLite.carbonLiteMessageTimer) {
-            console.log('CarbonLite: clearing message fade out timer')
+            this.debug('CarbonLite: clearing message fade out timer')
             clearTimeout(CarbonLite.carbonLiteMessageTimer)
         }
 

@@ -7,4 +7,5 @@ export interface CarbonLiteConfig {
     messageColourHover?: string;
     messageBorderColour?: string;
     messageDropShadowColour?: string;
+    debug: boolean;
 }

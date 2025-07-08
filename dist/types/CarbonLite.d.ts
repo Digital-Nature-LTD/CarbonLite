@@ -9,6 +9,7 @@ export default class CarbonLite {
     carbonLiteMessageTimer: ReturnType<typeof setTimeout> | undefined;
     config: CarbonLiteConfig;
     configure(configuration: object): void;
+    debug(message: string): void;
     init(configuration?: CarbonLiteConfig | null): void;
     generateStyles(): string;
     addEventListeners(): void;
