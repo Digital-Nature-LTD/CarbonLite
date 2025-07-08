@@ -1,8 +1,10 @@
 # CarbonLite
-A lightweight tool that blacks out a browser window when the user has not interacted with the page for a while
+A lightweight tool that blacks out a browser window when the user has not interacted with the page for a while.
+
+![A preview of CarbonLite in action](carbon-lite-preview.png "CarbonLite when activated")
 
 ## Installation
-Installation is as simple as adding the script to your site/page:
+There are a few installation options depending on your own level of expertise/comfort with web development. If you are maintaining a website through a CMS then you will likely want the simple option, but do also check out the simple with configuration option if you would like to customise CarbonLite
 
 ### Simple installation
 The most simple installation just requires the script to be added to your site
@@ -10,14 +12,29 @@ The most simple installation just requires the script to be added to your site
 <script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js"></script>
 ```
 
-### Configurable installation
+### Simple installation - with configuration
 As with the simple installation, but you can add parameters to personalise Carbon Lite - see the configuration section below for a list of available parameters
 ```html
 <script defer="defer" type="text/javascript" src="https://cdn.jsdelivr.net/gh/Digital-Nature-LTD/CarbonLite@1.0.0/dist/carbon-lite.umd.min.js?message=My Custom Message"></script>
 ```
 
-### NPM installation
-coming soon
+### NPM package
+You can install the package with npm
+```shell
+npm i @digital-nature-ltd/carbon-lite
+```
+You can then import and use CarbonLite in your scripts. 
+```javascript
+import CarbonLite from '@digital-nature-ltd/carbon-lite';
+
+const cl = new CarbonLite();
+// Call init to start CarbonLite.
+// You can also pass configuration options to the init method
+cl.init({
+    timeout: 3000
+});
+```
+
 
 ### Need help with installation?
 We're keen to get CarbonLite installed on as many sites as possible. If you're not able to get it up and running yourself then please get in touch with us on <hello@digital-nature.co.uk> and we will help with the installation - free of charge.
