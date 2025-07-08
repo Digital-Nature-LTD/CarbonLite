@@ -1,4 +1,25 @@
 {
+  "name": "carbon-lite",
+  "description": "A simple tool to reduce the carbon usage of your website by blanking out the screen after a period of inactivity",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "email": "gareth@digital-nature.co.uk",
+    "name": "Gareth Midwood"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Digital-Nature-LTD"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Digital-Nature-LTD/CarbonLite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Digital-Nature-LTD/CarbonLite/issues"
+  },
+  "homepage": "https://www.digital-nature.co.uk/libraries/carbon-lite",
+  "keywords": ["Carbon", "Carbon Reduction", "Energy", "Energy Saving", "Climate", "Sustainable", "Environment"],
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
