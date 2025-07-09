@@ -3,8 +3,6 @@ import { CarbonLiteElement } from './elements/CarbonLiteElement';
 import { CarbonLiteConfig } from './types/CarbonLiteConfig';
 export default class CarbonLite {
     initialised: boolean;
-    mediaPlaying: boolean;
-    suspended: boolean;
     carbonLite: CarbonLiteElement;
     carbonLiteMessage: CarbonLiteMessage;
     carbonLiteTimer: ReturnType<typeof setTimeout> | undefined;
@@ -15,7 +13,6 @@ export default class CarbonLite {
     init(configuration?: CarbonLiteConfig | null): void;
     generateStyles(): string;
     getIframes(): HTMLIFrameElement[];
-    getAllDocumentsAndFrames(): void;
     addGlobalEventListener(eventType: string): void;
     addEventListeners(): void;
     addVideoEventListeners(): void;

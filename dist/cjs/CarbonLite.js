@@ -6,8 +6,6 @@ var CarbonLiteElement = require('./elements/CarbonLiteElement.js');
 class CarbonLite {
     constructor() {
         this.initialised = false;
-        this.mediaPlaying = false;
-        this.suspended = false;
         // objects
         this.carbonLite = new CarbonLiteElement.CarbonLiteElement();
         this.carbonLiteMessage = new CarbonLiteMessage.CarbonLiteMessage();
@@ -31,11 +29,11 @@ class CarbonLite {
     }
     debug(message) {
         if (this.config.debug) {
-            console.log(message);
+            console.log(`CarbonLite: ${message}`);
         }
     }
     init(configuration = null) {
-        this.debug('CarbonLite: initialising');
+        this.debug('initialising');
         if (this.initialised) {
             return;
         }
@@ -62,7 +60,7 @@ class CarbonLite {
             top: 0;
             left: 0;
             color: ${this.config.messageColour};
-            z-index: 999998;
+            z-index: 2147483646;
             background: ${this.config.backgroundColour};
             display: flex;
             justify-content: center;
@@ -75,7 +73,7 @@ class CarbonLite {
             right: 100px;
             color: ${this.config.messageColour};
             text-align: center;
-            z-index: 999999;
+            z-index: 2147483647;
             opacity: 0.8;
             transition: opacity ${this.config.messageTimeout}ms ease-in;
             
@@ -125,30 +123,20 @@ class CarbonLite {
         }
         return iframesArray;
     }
-    getAllDocumentsAndFrames() {
-        let elements = [];
-        let iframes = this.getIframes();
-        for (let i = 0; i < iframes.length; i++) {
-            elements.push(iframes[i].contentDocument);
-        }
-        elements.push(document);
-    }
     addGlobalEventListener(eventType) {
         let CarbonLite = this;
         let iframes = this.getIframes();
         iframes.forEach(iframe => {
             iframe.addEventListener(eventType, () => {
-                console.log(`event ${eventType} fired`);
                 CarbonLite.userInteracted();
             });
         });
         document.addEventListener(eventType, () => {
-            console.log(`event ${eventType} fired`);
             CarbonLite.userInteracted();
         });
     }
     addEventListeners() {
-        this.debug('CarbonLite: adding event listeners');
+        this.debug('adding event listeners');
         this.addGlobalEventListener('mousemove');
         this.addGlobalEventListener('click');
         this.addGlobalEventListener('scroll');
@@ -156,11 +144,11 @@ class CarbonLite {
         this.addGlobalEventListener('resize');
         this.addVideoEventListeners();
         let CarbonLite = this;
-        this.debug('CarbonLite: adding message event listeners');
+        this.debug('adding message event listeners');
         CarbonLite.carbonLiteMessage.addEventListener(`mouseenter`, (event) => {
             CarbonLite.carbonLiteMessage.classList.remove('fading');
             if (CarbonLite.carbonLiteMessageTimer) {
-                this.debug('CarbonLite: clearing message fade out timer due to mouseenter');
+                this.debug('clearing message fade out timer due to mouseenter');
                 clearTimeout(CarbonLite.carbonLiteMessageTimer);
             }
         });
@@ -175,24 +163,22 @@ class CarbonLite {
         });
     }
     addVideoEventListeners() {
-        this.debug('CarbonLite: adding video event listeners');
+        this.debug('adding video event listeners');
         let CarbonLite = this;
         let videos = document.getElementsByTagName(`video`);
         for (let i = 0; i < videos.length; i++) {
             let videoEl = videos[i];
             videoEl.addEventListener(`playing`, () => {
-                console.log('playing');
-                CarbonLite.mediaPlaying = true;
+                CarbonLite.debug('video playing');
                 CarbonLite.suspend();
             });
             videoEl.addEventListener(`ended`, () => {
-                CarbonLite.mediaPlaying = false;
+                CarbonLite.debug('video ended');
+                CarbonLite.resume();
             });
             videoEl.addEventListener(`pause`, () => {
-                CarbonLite.mediaPlaying = false;
-            });
-            videoEl.addEventListener(`suspend`, () => {
-                CarbonLite.mediaPlaying = false;
+                CarbonLite.debug('video paused');
+                CarbonLite.resume();
             });
         }
     }
@@ -201,9 +187,6 @@ class CarbonLite {
         this.carbonLiteTimer = setTimeout(() => { this.open(); }, this.config.timeout);
     }
     userInteracted() {
-        if (this.mediaPlaying) {
-            return;
-        }
         if (this.carbonLite) {
             this.hideBackground();
         }
@@ -212,14 +195,18 @@ class CarbonLite {
         }
     }
     suspend() {
-        console.log('suspending');
-        document.body.removeChild(this.carbonLite);
-        document.body.removeChild(this.carbonLiteMessage);
+        this.debug('suspending timer');
+        if (this.carbonLite.parentNode === document.body) {
+            document.body.removeChild(this.carbonLite);
+        }
+        if (this.carbonLiteMessage.parentNode === document.body) {
+            document.body.removeChild(this.carbonLiteMessage);
+        }
         clearTimeout(this.carbonLiteTimer);
         clearTimeout(this.carbonLiteMessageTimer);
     }
     resume() {
-        console.log('resuming');
+        this.debug('resuming timer');
         this.restartTimer();
     }
     hideBackground() {
@@ -234,24 +221,24 @@ class CarbonLite {
         if (!CarbonLite.carbonLiteMessage || !CarbonLite.carbonLiteMessage.parentNode) {
             return;
         }
-        this.debug('CarbonLite: hiding message');
+        this.debug('hiding message');
         document.body.removeChild(CarbonLite.carbonLiteMessage);
-        this.debug('CarbonLite: clearing message fade out timer due to message being hidden');
+        this.debug('clearing message fade out timer due to message being hidden');
         clearTimeout(CarbonLite.carbonLiteMessageTimer);
         CarbonLite.carbonLiteMessage.classList.remove('fading');
-        this.debug('CarbonLite: restarting timer after message has been hidden');
+        this.debug('restarting timer after message has been hidden');
         CarbonLite.restartTimer();
     }
     fadeOutMessage() {
-        this.debug('CarbonLite: setting timer to fade out message');
+        this.debug('setting timer to fade out message');
         this.carbonLiteMessage.classList.add('fading');
         this.carbonLiteMessageTimer = setTimeout(() => { this.hideMessage(); }, this.config.messageTimeout);
     }
     open() {
-        this.debug('CarbonLite: opening');
+        this.debug('opening');
         let CarbonLite = this;
         if (CarbonLite.carbonLiteMessageTimer) {
-            this.debug('CarbonLite: clearing message fade out timer');
+            this.debug('clearing message fade out timer');
             clearTimeout(CarbonLite.carbonLiteMessageTimer);
         }
         document.body.appendChild(CarbonLite.carbonLite);
