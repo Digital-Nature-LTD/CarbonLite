@@ -113,3 +113,21 @@ The colour of the CarbonLite message drop shadow, not that this is only shown wh
 #### Param: messageDropShadowColour
 #### Default: #555
 #### Example - As "Background Colour" but with updated parameter name
+
+
+## Events
+CarbonLite can be suspended and resumed using custom events, this can be useful if there are times that you would like to prevent CarbonLite from triggering, e.g. while watching a video
+
+### Suspend
+Closes CarbonLite and stops it from re-opening
+```javascript
+const customEventSuspend = new CustomEvent('carbon-lite-suspend');
+document.dispatchEvent(customEventSuspend);
+```
+
+### Resume
+Restarts the CarbonLite timer (from 0s)
+```javascript
+const customEventResume = new CustomEvent('carbon-lite-resume');
+document.dispatchEvent(customEventResume);
+```
