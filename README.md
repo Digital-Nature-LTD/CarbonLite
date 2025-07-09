@@ -109,7 +109,7 @@ The text/icon colour of the CarbonLite message while hovering
 **Example** - As "Background Colour" but with updated parameter name
 
 ### Message Border Colour
-The colour of the CarbonLite message border, not that this is only shown when the CarbonLite background has been removed
+The colour of the CarbonLite message border, note that this is only shown when the CarbonLite background has been removed
 
 **Param:** messageBorderColour
 
@@ -119,7 +119,7 @@ The colour of the CarbonLite message border, not that this is only shown when th
 
 
 ### Message Drop Shadow Colour
-The colour of the CarbonLite message drop shadow, not that this is only shown when the CarbonLite background has been removed
+The colour of the CarbonLite message drop shadow, note that this is only shown when the CarbonLite background has been removed
 
 **Param**: messageDropShadowColour
 
