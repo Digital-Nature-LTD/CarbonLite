@@ -134,15 +134,6 @@ export default class CarbonLite {
         return iframesArray;
     }
 
-    getAllDocumentsAndFrames() {
-        let elements = [];
-        let iframes = this.getIframes()
-        for (let i = 0; i < iframes.length; i++) {
-            elements.push(iframes[i].contentDocument);
-        }
-        elements.push(document);
-    }
-
     addGlobalEventListener(eventType: string) {
         let CarbonLite = this;
 
@@ -150,13 +141,11 @@ export default class CarbonLite {
 
         iframes.forEach(iframe => {
             iframe.addEventListener(eventType, () => {
-                console.log(`event ${eventType} fired`)
                 CarbonLite.userInteracted()
             })
         })
 
         document.addEventListener(eventType, () => {
-            console.log(`event ${eventType} fired`)
             CarbonLite.userInteracted()
         })
     }
@@ -206,7 +195,7 @@ export default class CarbonLite {
             let videoEl = videos[i]
 
             videoEl.addEventListener(`playing`, () => {
-                console.log('playing')
+                CarbonLite.debug('playing')
                 CarbonLite.mediaPlaying = true;
                 CarbonLite.suspend()
             })
@@ -240,7 +229,7 @@ export default class CarbonLite {
     }
 
     suspend() {
-        console.log('suspending')
+        this.debug('suspending')
         document.body.removeChild(this.carbonLite)
         document.body.removeChild(this.carbonLiteMessage)
         clearTimeout(this.carbonLiteTimer)
@@ -248,7 +237,7 @@ export default class CarbonLite {
     }
 
     resume() {
-        console.log('resuming')
+        this.debug('resuming')
         this.restartTimer()
     }
 
