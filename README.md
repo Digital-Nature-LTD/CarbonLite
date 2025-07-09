@@ -47,7 +47,9 @@ Note that examples each show a single parameter, but you can add several using t
 
 ### Timeout
 This is the number of milliseconds before CarbonLite is triggered
+
 **Param:** timeout
+
 **Default:** 60000 (60 seconds)
 #### Example
 ```html
@@ -57,7 +59,9 @@ This is the number of milliseconds before CarbonLite is triggered
 
 ### Message Timeout
 This is the number of milliseconds that it takes for the CarbonLite message to fade out after the user interacts with the page
+
 **Param:** messageTimeout
+
 **Default:** 3000 (3 seconds)
 #### Example
 ```html
@@ -67,7 +71,9 @@ This is the number of milliseconds that it takes for the CarbonLite message to f
 
 ### Message
 The message displayed in the middle of the screen when CarbonLite is active
+
 **Param:** message
+
 **Default:** Saving the planet, one (dark) pixel at a time
 #### Example
 ```html
@@ -76,7 +82,9 @@ The message displayed in the middle of the screen when CarbonLite is active
 
 ### Background Colour
 The background colour when CarbonLite is active. Note that the purpose of CarbonLite is to reduce energy usage, so please ensure you choose a low-energy colour if you're replacing the default
+
 **Param:** backgroundColour
+
 **Default:** #000 (black)
 #### Example
 ```html
