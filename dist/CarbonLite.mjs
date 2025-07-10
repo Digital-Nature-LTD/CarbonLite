@@ -1,14 +1,12 @@
-'use strict';
-
-var CarbonLiteMessage = require('./elements/CarbonLiteMessage.js');
-var CarbonLiteElement = require('./elements/CarbonLiteElement.js');
+import { CarbonLiteMessage } from './elements/CarbonLiteMessage.mjs';
+import { CarbonLiteElement } from './elements/CarbonLiteElement.mjs';
 
 class CarbonLite {
     constructor() {
         this.initialised = false;
         // objects
-        this.carbonLite = new CarbonLiteElement.CarbonLiteElement();
-        this.carbonLiteMessage = new CarbonLiteMessage.CarbonLiteMessage();
+        this.carbonLite = new CarbonLiteElement();
+        this.carbonLiteMessage = new CarbonLiteMessage();
         this.carbonLiteTimer = undefined;
         this.carbonLiteMessageTimer = undefined;
         // configurable
@@ -246,5 +244,5 @@ class CarbonLite {
     }
 }
 
-module.exports = CarbonLite;
-//# sourceMappingURL=CarbonLite.js.map
+export { CarbonLite as default };
+//# sourceMappingURL=CarbonLite.mjs.map

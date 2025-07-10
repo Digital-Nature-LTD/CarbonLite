@@ -5,11 +5,12 @@ export default [
     {
         input: 'src/CarbonLite.ts',
         output: {
-            dir: 'dist/esm',
+            dir: 'dist',
             format: 'esm',
             sourcemap: true,
             preserveModules: true,
-            preserveModulesRoot: 'src'
+            preserveModulesRoot: 'src',
+            entryFileNames: '[name].mjs',
         },
         plugins: [
             typescript({
@@ -21,30 +22,11 @@ export default [
         ],
         external: []
     },
-    // CJS build
-    {
-        input: 'src/CarbonLite.ts',
-        output: {
-            dir: 'dist/cjs',
-            format: 'cjs',
-            sourcemap: true,
-            preserveModules: true,
-            preserveModulesRoot: 'src'
-        },
-        plugins: [
-            typescript({
-                tsconfig: './tsconfig.json',
-                declaration: false,
-                emitDeclarationOnly: false
-            })
-        ],
-        external: []
-    },
     // UMD build (single file)
     {
         input: 'src/CarbonLite.ts',
         output: {
-            file: 'dist/umd/carbonlite.js',
+            file: 'dist/CarbonLite.js',
             format: 'umd',
             name: 'CarbonLite',
             sourcemap: true
@@ -62,7 +44,7 @@ export default [
     {
         input: 'src/CarbonLiteSimple.js',
         output: {
-            file: 'dist/umd/carbonlite-simple.js',
+            file: 'dist/CarbonLiteSimple.js',
             format: 'umd',
             name: 'CarbonLite',
             sourcemap: true

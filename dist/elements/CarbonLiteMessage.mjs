@@ -1,5 +1,3 @@
-'use strict';
-
 class CarbonLiteMessage extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -28,5 +26,5 @@ class CarbonLiteMessage extends HTMLElement {
 }
 customElements.define('carbon-lite-message', CarbonLiteMessage);
 
-exports.CarbonLiteMessage = CarbonLiteMessage;
-//# sourceMappingURL=CarbonLiteMessage.js.map
+export { CarbonLiteMessage };
+//# sourceMappingURL=CarbonLiteMessage.mjs.map

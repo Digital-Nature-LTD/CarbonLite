@@ -1,5 +1,3 @@
-'use strict';
-
 class CarbonLiteElement extends HTMLElement {
     configure(message) {
         this.innerHTML = `
@@ -11,5 +9,5 @@ class CarbonLiteElement extends HTMLElement {
 }
 customElements.define('carbon-lite', CarbonLiteElement);
 
-exports.CarbonLiteElement = CarbonLiteElement;
-//# sourceMappingURL=CarbonLiteElement.js.map
+export { CarbonLiteElement };
+//# sourceMappingURL=CarbonLiteElement.mjs.map

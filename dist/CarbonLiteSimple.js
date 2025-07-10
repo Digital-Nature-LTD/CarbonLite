@@ -319,4 +319,4 @@
     }
 
 }));
-//# sourceMappingURL=carbonlite-simple.js.map
+//# sourceMappingURL=CarbonLiteSimple.js.map

@@ -1,6 +1,6 @@
 import { CarbonLiteMessage } from './elements/CarbonLiteMessage';
 import { CarbonLiteElement } from './elements/CarbonLiteElement';
-import { CarbonLiteConfig } from './types/CarbonLiteConfig';
+import { CarbonLiteConfig } from './config/CarbonLiteConfig';
 export default class CarbonLite {
     initialised: boolean;
     carbonLite: CarbonLiteElement;
