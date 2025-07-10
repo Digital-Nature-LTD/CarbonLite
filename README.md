@@ -1,5 +1,5 @@
 # CarbonLite
-A lightweight tool (~17 KB) that blacks out a browser window when the user has not interacted with the page for a while.
+A lightweight tool that blacks out a browser window when the user has not interacted with the page for a while.
 
 ![A preview of CarbonLite in action](carbon-lite-preview.png "CarbonLite when activated")
 
