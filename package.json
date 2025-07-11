@@ -32,7 +32,8 @@
   "main": "./dist/CarbonLite",
   "module": "./dist/CarbonLite",
   "exports": {
-    "import": "./dist/CarbonLite"
+    ".": "./dist/CarbonLite",
+    "./package.json": "./package.json"
   },
   "types": "./dist/types/CarbonLite.d.ts",
   "scripts": {
