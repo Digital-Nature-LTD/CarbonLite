@@ -163,6 +163,7 @@
             return iframesArray;
         }
         addGlobalEventListener(eventType) {
+            this.debug(`Adding listeners for event type ${eventType}`);
             let CarbonLite = this;
             let iframes = this.getIframes();
             iframes.forEach(iframe => {
@@ -226,23 +227,31 @@
             this.carbonLiteTimer = setTimeout(() => { this.open(); }, this.config.timeout);
         }
         userInteracted() {
-            if (this.carbonLite) {
+            if (this.backgroundIsVisible()) {
+                this.debug('user interacted - hiding');
                 this.hideBackground();
             }
             else {
+                this.debug('user interacted - restarting timer');
                 this.restartTimer();
             }
         }
         suspend() {
             this.debug('suspending timer');
-            if (this.carbonLite.parentNode === document.body) {
+            if (this.backgroundIsVisible()) {
                 document.body.removeChild(this.carbonLite);
             }
-            if (this.carbonLiteMessage.parentNode === document.body) {
+            if (this.messageIsVisible()) {
                 document.body.removeChild(this.carbonLiteMessage);
             }
             clearTimeout(this.carbonLiteTimer);
             clearTimeout(this.carbonLiteMessageTimer);
+        }
+        backgroundIsVisible() {
+            return this.carbonLite.parentNode === document.body;
+        }
+        messageIsVisible() {
+            return this.carbonLiteMessage.parentNode === document.body;
         }
         resume() {
             this.debug('resuming timer');

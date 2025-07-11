@@ -19,6 +19,8 @@ export default class CarbonLite {
     restartTimer(): void;
     userInteracted(): void;
     suspend(): void;
+    backgroundIsVisible(): boolean;
+    messageIsVisible(): boolean;
     resume(): void;
     hideBackground(): void;
     hideMessage(): void;
