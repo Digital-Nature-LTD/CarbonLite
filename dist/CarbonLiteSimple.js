@@ -6,7 +6,7 @@
     class CarbonLiteMessage extends HTMLElement {
         connectedCallback() {
             this.innerHTML = `
-    <a href="https://www.digital-nature.co.uk" target="_blank">
+    <a href="https://www.digital-nature.co.uk/libraries/carbon-lite" target="_blank">
         <svg
            fill="currentColor"
            viewBox="0 0 489.242 489.242"
