@@ -11,7 +11,7 @@ class CarbonLite {
         this.carbonLiteMessageTimer = undefined;
         // configurable
         this.config = {
-            message: 'Saving the planet, one (dark) pixel at a time',
+            message: 'CarbonLite. Saving the planet, one (dark) pixel at a time',
             timeout: 60000,
             backgroundColour: '#000',
             messageTimeout: 3000,
