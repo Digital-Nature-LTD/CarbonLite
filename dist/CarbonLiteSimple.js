@@ -57,10 +57,10 @@
                 timeout: 60000,
                 backgroundColour: '#000',
                 messageTimeout: 3000,
-                messageColour: '#222',
-                messageColourHover: '#DDD',
-                messageBorderColour: '#DDD',
-                messageDropShadowColour: '#555',
+                messageColour: '#254137',
+                messageColourHover: '#7DF799',
+                messageBorderColour: '#7DF799',
+                messageDropShadowColour: '#254137',
                 debug: false
             };
         }
