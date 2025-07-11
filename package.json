@@ -1,7 +1,7 @@
 {
   "name": "@digital-nature-ltd/carbon-lite",
   "description": "A simple tool to reduce the carbon usage of your website by blanking out the screen after a period of inactivity",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
   "author": {
     "email": "gareth@digital-nature.co.uk",
