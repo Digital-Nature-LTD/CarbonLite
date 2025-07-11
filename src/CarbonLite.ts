@@ -4,6 +4,7 @@ import { CarbonLiteConfig } from './config/CarbonLiteConfig';
 
 export default class CarbonLite {
     initialised: boolean = false;
+    ignoreInteractions: boolean = false;
 
     // objects
     carbonLite: CarbonLiteElement = new CarbonLiteElement();
@@ -175,15 +176,34 @@ export default class CarbonLite {
             CarbonLite.fadeOutMessage()
         })
 
-        document.addEventListener('carbon-lite-suspend', function(event) {
+        document.addEventListener('carbon-lite-suspend', function(event: CustomEvent) {
             CarbonLite.suspend()
         });
 
-        document.addEventListener('carbon-lite-resume', function(event) {
+        document.addEventListener('carbon-lite-resume', function(event: CustomEvent) {
             CarbonLite.resume()
         });
 
-        document.addEventListener('carbon-lite-open', function(event) {
+        document.addEventListener('carbon-lite-open', (event: CustomEvent) => {
+            if (event.detail?.interactionDelay) {
+                this.debug(`ignoring interactions for ${event.detail.interactionDelay} ms`)
+                CarbonLite.ignoreInteractions = true;
+                let originalMessage = this.config.message;
+
+                if (event.detail.tempMessage) {
+                    this.debug(`Adding a temporary message ${event.detail.tempMessage}`)
+                    this.carbonLite.configure(event.detail.tempMessage);
+                }
+
+                setTimeout(() => {
+                    this.debug('allowing interactions')
+                    CarbonLite.ignoreInteractions = false;
+                    if (originalMessage) {
+                        this.carbonLite.configure(originalMessage);
+                    }
+                }, event.detail.interactionDelay)
+            }
+
             CarbonLite.open()
         });
     }
@@ -218,6 +238,11 @@ export default class CarbonLite {
     }
 
     userInteracted() {
+        if (this.ignoreInteractions) {
+            this.debug('ignoring interactions')
+            return
+        }
+
         if (this.backgroundIsVisible()) {
             this.debug('user interacted - hiding')
             this.hideBackground()

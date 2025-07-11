@@ -9,3 +9,10 @@ export interface CarbonLiteConfig {
     messageDropShadowColour?: string;
     debug: boolean;
 }
+declare global {
+    interface DocumentEventMap {
+        'carbon-lite-open': CustomEvent;
+        'carbon-lite-suspend': CustomEvent;
+        'carbon-lite-resume': CustomEvent;
+    }
+}

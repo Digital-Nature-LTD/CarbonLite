@@ -3,6 +3,7 @@ import { CarbonLiteElement } from './elements/CarbonLiteElement';
 import { CarbonLiteConfig } from './config/CarbonLiteConfig';
 export default class CarbonLite {
     initialised: boolean;
+    ignoreInteractions: boolean;
     carbonLite: CarbonLiteElement;
     carbonLiteMessage: CarbonLiteMessage;
     carbonLiteTimer: ReturnType<typeof setTimeout> | undefined;

@@ -46,6 +46,7 @@
     class CarbonLite {
         constructor() {
             this.initialised = false;
+            this.ignoreInteractions = false;
             // objects
             this.carbonLite = new CarbonLiteElement();
             this.carbonLiteMessage = new CarbonLiteMessage();
@@ -202,6 +203,25 @@
             document.addEventListener('carbon-lite-resume', function (event) {
                 CarbonLite.resume();
             });
+            document.addEventListener('carbon-lite-open', (event) => {
+                if (event.detail?.interactionDelay) {
+                    this.debug(`ignoring interactions for ${event.detail.interactionDelay} ms`);
+                    CarbonLite.ignoreInteractions = true;
+                    let originalMessage = this.config.message;
+                    if (event.detail.tempMessage) {
+                        this.debug(`Adding a temporary message ${event.detail.tempMessage}`);
+                        this.carbonLite.configure(event.detail.tempMessage);
+                    }
+                    setTimeout(() => {
+                        this.debug('allowing interactions');
+                        CarbonLite.ignoreInteractions = false;
+                        if (originalMessage) {
+                            this.carbonLite.configure(originalMessage);
+                        }
+                    }, event.detail.interactionDelay);
+                }
+                CarbonLite.open();
+            });
         }
         addVideoEventListeners() {
             this.debug('adding video event listeners');
@@ -228,6 +248,10 @@
             this.carbonLiteTimer = setTimeout(() => { this.open(); }, this.config.timeout);
         }
         userInteracted() {
+            if (this.ignoreInteractions) {
+                this.debug('ignoring interactions');
+                return;
+            }
             if (this.backgroundIsVisible()) {
                 this.debug('user interacted - hiding');
                 this.hideBackground();
