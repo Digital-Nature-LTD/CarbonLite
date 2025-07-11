@@ -105,6 +105,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            
+            div {
+                max-width: 80%;
+                line-height: 1.5rem;
+            }
         }
         
         carbon-lite-message {
