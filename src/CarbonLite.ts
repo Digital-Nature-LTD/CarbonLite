@@ -182,6 +182,10 @@ export default class CarbonLite {
         document.addEventListener('carbon-lite-resume', function(event) {
             CarbonLite.resume()
         });
+
+        document.addEventListener('carbon-lite-open', function(event) {
+            CarbonLite.open()
+        });
     }
 
     addVideoEventListeners() {

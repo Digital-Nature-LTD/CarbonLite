@@ -139,6 +139,13 @@ The colour of the CarbonLite message drop shadow, note that this is only shown w
 ## Events
 CarbonLite can be suspended and resumed using custom events, this can be useful if there are times that you would like to prevent CarbonLite from triggering, e.g. while watching a video
 
+### Open
+Closes CarbonLite and stops it from re-opening
+```javascript
+const customEventOpen = new CustomEvent('carbon-lite-open');
+document.dispatchEvent(customEventOpen);
+```
+
 ### Suspend
 Closes CarbonLite and stops it from re-opening
 ```javascript
