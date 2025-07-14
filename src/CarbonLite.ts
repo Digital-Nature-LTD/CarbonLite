@@ -68,7 +68,7 @@ export default class CarbonLite {
             top: 0;
             left: 0;
             color: ${this.config.messageColour};
-            z-index: 2147483646;
+            z-index: 2147483647;
             background: ${this.config.backgroundColour};
             display: flex;
             justify-content: center;
