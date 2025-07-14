@@ -153,7 +153,7 @@ You can (optionally) provide event details to alter the behaviour:
 - `interactionDelay` is a number of milliseconds. During this time the overlay will ignore interactions (i.e. stay open)
 - `tempMessage` is a temporary message to display while interactions are suspended
 
-The example below will open the overlay immediately, even if the user interacts it will not close for the next 5 seconds and during this time it will display the temporary message.
+The example below will open the overlay immediately, even if the user interacts, it will not close for the next 5 seconds, and during this time it will display the temporary message.
 ```javascript
 const customEventOpen = new CustomEvent('carbon-lite-open', { 'detail': { interactionDelay: 5000, tempMessage: 'This message will show while ignoring interactions' } });
 document.dispatchEvent(customEventOpen);
