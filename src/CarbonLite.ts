@@ -14,7 +14,7 @@ export default class CarbonLite {
 
     // configurable
     config: CarbonLiteConfig = {
-        message: 'CarbonLite is reducing the carbon usage of this site, one (dark) pixel at a time',
+        message: 'CarbonLite is reducing the carbon impact of this site, one (dark) pixel at a time',
         timeout: 60000,
         backgroundColour: '#000',
         messageTimeout: 3000,
