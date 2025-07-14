@@ -159,9 +159,6 @@ const customEventOpen = new CustomEvent('carbon-lite-open', { 'detail': { intera
 document.dispatchEvent(customEventOpen);
 ```
 
-
-
-
 ### Suspend
 Closes CarbonLite and stops it from re-opening
 ```javascript
